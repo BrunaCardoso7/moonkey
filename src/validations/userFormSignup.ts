@@ -17,4 +17,10 @@ export const userAuthFormdata = z.object({
     email: z.string().min(1,'Campo obrigatório').email('Formato de email inválido'),
     password: z.string().min(1, 'Campo obrigatório'),
 })
+export const UserAuthProps = z.object({
+    id: z.string().optional(),
+    nome: z.string().optional(),
+    telefone: z.string().optional(),
+    ...userAuthFormdata.shape,
+})
 export type UserAuthProps = z.infer<typeof userAuthFormdata>

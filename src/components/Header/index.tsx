@@ -12,7 +12,7 @@ const HeaderStyle = styled.header`
 const Logo = styled.h2`
     @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap')
     font-family: "Raleway" !important, sans-serif !important;
-    font-weight: 100;
+    font-weight: 300;
     margin-bottom: 14px;
     user-select: none;
     font-size: 2rem;

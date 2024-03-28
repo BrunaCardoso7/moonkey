@@ -14,9 +14,8 @@ import {
 import { useForm } from "react-hook-form";
 import { UserCreatedProps, userCreatedFormdata } from '../../../../validations/userFormSignup'
 import { zodResolver } from '@hookform/resolvers/zod'
-import createUserApi from '@/api/api';
+import {createUserApi} from '@/api/api';
 import Alert  from '@mui/material/Alert';
-import { CheckBox } from '@mui/icons-material';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import Link from 'next/link';

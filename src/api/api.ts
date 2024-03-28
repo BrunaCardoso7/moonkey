@@ -18,6 +18,7 @@ async function createUserApi (data: UserCreatedProps) {
     }
 }
 async function authUserApi (data:UserAuthProps) {
+    console.log(data)
     try {
         const { email, password } = data
         const authUser = await axios.post(`${url}/user/signin`, {
