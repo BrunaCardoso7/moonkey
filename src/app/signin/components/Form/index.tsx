@@ -27,7 +27,7 @@ import {useRouter} from 'next/navigation'
 export default function Formdata ()  {
     const router = useRouter()   
     const [responseData, setResponseData] = useState(false)
-    const {login, logout} = useContext(AuthContext)
+    const {login} = useContext(AuthContext)
     const [message, setMessage] = useState('')
     const { register, handleSubmit, formState: {errors} } = useForm<UserProps>({
         resolver: zodResolver(userAuthFormdata)

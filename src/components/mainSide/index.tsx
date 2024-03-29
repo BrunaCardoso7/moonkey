@@ -1,25 +1,33 @@
 import styled from "styled-components"
 import MenuIcon from '@mui/icons-material/Menu';
-import { HomeOutlined, MenuOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { HomeOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
+type MainAsideProps = {
+    open: boolean
+}
 
 const Aside = styled.aside `
-    height: 100vh;
+    height: 100%;
     width: fit-content;
-    padding: 15px 5px;
+    padding: 15px 10px;
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    z-index: 999
 `
-const ButtonMenu = styled.div`
+export const ButtonMenu = styled.div`
     height: fit-content;
     width: 100%;
-    padding: 14px;
+    padding: 10px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 14px;
-    margin-bottom: 14px;
     gap: 30px;
     :hover&&{
         transition: .3s;
@@ -27,45 +35,32 @@ const ButtonMenu = styled.div`
     }
 `
 const ButtonTittle = styled.p`
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     width: 100%;
     cursor: pointer;
     user-select: none;
 `
-const Logo = styled.h2`
-    @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap')
-    font-family: "Raleway" !important, sans-serif !important;
-    font-weight: 300;
-    margin-bottom: 14px;
-    user-select: none;
-    font-size: 2rem;
-    span{
-        color: #D1A300;
-    }
-`
-const OpenMenu = styled.div`
+export const OpenMenu = styled.div`
     display: flex;
     align-items: center;
 `
-export default function MainAside (){
-    const [open, setOpen] = useState(false)
+
+export default function MainAside ({open}: MainAsideProps){
 
     return (
-        <Aside style={open? {width: '300px'} : {width: 'fit-content'}}>
-            <OpenMenu>
-                <ButtonMenu onClick={()=>setOpen(!open)} style={{width: 'fit-content', marginRight: '30px'}}>
-                    <MenuOutlined style={{fontSize: '2rem'}} /> 
-                </ButtonMenu>
-                {open&& <Logo>Moon<span>key</span></Logo>}
-            </OpenMenu>
-            <ButtonMenu>
-                <HomeOutlined style={{fontSize: '2rem'}}/>    
-                {open&&<ButtonTittle>Inicio</ButtonTittle>   }
-            </ButtonMenu>
-            <ButtonMenu>
-                <PlusCircleOutlined style={{fontSize: '2rem'}}/>
-                {open&&<ButtonTittle>Novo Produto</ButtonTittle>   }
-            </ButtonMenu>
-        </Aside>
+            <Aside style={open? {width: '360px'} : {width: 'fit-content'}}>
+                <Link href={'/'} >
+                    <ButtonMenu style={!open ? {width: 'fit-content', marginRight: '30px'}: { width: '80%'}}>
+                        <HomeOutlined style={{fontSize: '1.5rem'}}/>    
+                        {open&&<ButtonTittle>Inicio</ButtonTittle>   }
+                    </ButtonMenu>
+                </Link>
+                <Link href={'produto'}>
+                    <ButtonMenu style={!open ? {width: 'fit-content', marginRight: '30px'}: { width: '80%'}}>
+                        <PlusCircleOutlined style={{fontSize: '1.5rem'}}/>
+                        {open&&<ButtonTittle>Novo Produto</ButtonTittle>   }
+                    </ButtonMenu>
+                </Link>
+            </Aside>    
     )
 }   

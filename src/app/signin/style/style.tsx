@@ -67,7 +67,6 @@ export const Text = styled.p <TextProps>`
     font-weight: 300;
 `
 export const Input = styled.input`
-    /* margin: 0 20px; */
     height: 60px;
     padding: 10px;
     font-size: 1rem;
