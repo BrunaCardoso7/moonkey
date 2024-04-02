@@ -34,14 +34,15 @@ async function authUserApi (data:UserAuthProps) {
 
 async function createProdutoApi (data: NewProdutoProps) {
     try {
-        const {produto, categoria, preco, quantidade, subcategoria} = data
+        console.log(data, 'from api')
+        const {nome, categoria, preco, quantidade, subcategoria} = data
 
         const newProduto = await axios.post(`${url}/produto`, {
-            produto,
+            nome,
             categoria,
+            subcategoria,
             preco,
             quantidade,
-            subcategoria
         })
 
         return newProduto   
@@ -52,5 +53,6 @@ async function createProdutoApi (data: NewProdutoProps) {
 
 export {
     createUserApi,
-    authUserApi
+    authUserApi,
+    createProdutoApi
 }

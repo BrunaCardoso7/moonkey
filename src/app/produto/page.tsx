@@ -18,15 +18,19 @@ import {
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
+import { createProdutoApi } from "@/api/api"
 
 const NewProduto = z.object({
-    produto: z.string().min(1),
+    nome: z.string().min(1),
     categoria: z.string().min(1),
     subcategoria: z.string().min(1),
-    quantidade: z.number().min(1),
-    preco: z.number().min(1)
+    quantidade: z.string().transform((v) => {
+        return parseInt(v)
+    }),
+    preco: z.string().transform((v) => {
+        return parseFloat(v)
+    })
 })
-
 
 export type NewProdutoProps = z.infer<typeof NewProduto>
 
@@ -35,8 +39,16 @@ export default function Produto () {
         resolver: zodResolver(NewProduto)
     })
 
-    const createProduct = (data:NewProdutoProps) => {
-        console.log(data)
+    const createProduct = async(data:NewProdutoProps) => {
+        try {
+            console.log(data)
+            const produto = await createProdutoApi(data)
+            console.log(produto)
+            return produto
+        } catch (error) {
+            console.log(data)
+            console.error("error de validação",error)
+        }
     }
 
     return (
@@ -54,9 +66,9 @@ export default function Produto () {
                             <p>Imagem do produto</p>
                         </InputImage>
                         <Conteinerinput>
-                            <Input placeholder="Nome do produto" {...register('produto')}/>
-                            {errors.produto && <span style={{color: 'red' }}>{errors.produto.message}</span>}
-                            <Input placeholder="Categoria" {...register('subcategoria')}/>
+                            <Input placeholder="Nome do produto" {...register('nome')}/>
+                            {errors.nome && <span style={{color: 'red' }}>{errors.nome.message}</span>}
+                            <Input placeholder="Categoria" {...register('categoria')}/>
                             {errors.categoria && <span style={{color: 'red' }}>{errors.categoria.message}</span>}
                             <Input placeholder="Sub categoria" {...register('subcategoria')}/>
                             {errors.subcategoria && <span style={{color: 'red' }}>{errors.subcategoria.message}</span>}
