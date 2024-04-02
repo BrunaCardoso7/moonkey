@@ -13,7 +13,7 @@ import {
 } from '../../style/style'
 
 import { useForm } from "react-hook-form";
-import { UserAuthProps, userAuthFormdata,  } from '../../../../validations/userFormSignup'
+import { userAuthFormdata,  } from '../../../../validations/userFormSignup'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {authUserApi} from '@/api/api';
 import Alert  from '@mui/material/Alert';

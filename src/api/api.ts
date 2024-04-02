@@ -1,3 +1,4 @@
+import { NewProdutoProps } from "@/app/produto/page";
 import { UserAuthProps, UserCreatedProps } from "@/validations/userFormSignup";
 import axios from "axios";
 
@@ -26,6 +27,24 @@ async function authUserApi (data:UserAuthProps) {
             password
         })
         return authUser
+    } catch (error) {
+        console.error("falha na requisição: "+error)
+    }
+}
+
+async function createProdutoApi (data: NewProdutoProps) {
+    try {
+        const {produto, categoria, preco, quantidade, subcategoria} = data
+
+        const newProduto = await axios.post(`${url}/produto`, {
+            produto,
+            categoria,
+            preco,
+            quantidade,
+            subcategoria
+        })
+
+        return newProduto   
     } catch (error) {
         console.error("falha na requisição: "+error)
     }
