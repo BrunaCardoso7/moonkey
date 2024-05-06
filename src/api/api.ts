@@ -50,9 +50,21 @@ async function createProdutoApi (data: NewProdutoProps) {
         console.error("falha na requisição: "+error)
     }
 }
+async function getProdutoApi () {
+    try {
+        // const {nome, categoria, preco, quantidade, subcategoria} = data
+
+        const newProduto = await axios.get(`${url}/produto`)
+
+        return newProduto   
+    } catch (error) {
+        console.error("falha na requisição: "+error)
+    }
+}
 
 export {
     createUserApi,
     authUserApi,
-    createProdutoApi
+    createProdutoApi,
+    getProdutoApi
 }

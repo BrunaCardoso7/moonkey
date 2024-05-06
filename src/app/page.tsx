@@ -2,6 +2,8 @@
 import Layout from "@/layout";
 import styled from "styled-components"
 import Link from "next/link";
+import { useEffect } from "react";
+import { getProdutoApi } from "@/api/api";
 const HomeConteiner = styled.div`
   width: 100vw;
   height: 100vh;
@@ -23,6 +25,20 @@ const ConteinerExcept = styled.div`
 `
 
 export default function Home() {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    async function fetchProdutos() {
+      try {
+        const produtosData = await getProdutoApi();
+        console.log(produtosData);
+      } catch (error) {
+        console.error('Erro ao obter produtos:', error);
+      }
+    }
+
+    fetchProdutos();
+  }, []);
+  
   return (
     <HomeConteiner>
       <Layout>
